@@ -13,9 +13,27 @@
 </head>
 <body>
 
+    <h3>Vi har ${requestScope.counter} kunder.</h3>
+
+
+    <h3>Oversigt over kunderne:</h3>
+    <br>
     <c:forEach var="element" items="${requestScope.oversigt}">
-        - ${element.value}
+        - ${element}
+        <br>
+        <br>
     </c:forEach>
 
+    <br>
+    <br>
+    <br>
+    <form action="LogOutServlet" method="post">
+        <%-- <label for="fname">Skriv vare</label><br> --%>
+        <%--<input type="text" id="fname" name="vareNavn"><br> --%>
+        <input type="submit" value="Logout">
+    </form>
+    <br>
+    <br>
+    <br>
 </body>
 </html>

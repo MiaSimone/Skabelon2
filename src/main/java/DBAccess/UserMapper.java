@@ -81,9 +81,88 @@ public class UserMapper {
         // Lukker efter mig:
         resultSet.close();
         statement.close();
-        myConnector.close();
+
 
         return returnList;
     }
 
+
+    public static void createEmployee( User user ) throws LoginSampleException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO Users (email, password, role) VALUES (?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement( SQL, Statement.RETURN_GENERATED_KEYS );
+            ps.setString( 1, user.getEmail() );
+            ps.setString( 2, user.getPassword() );
+            ps.setString( 3, user.getRole() );
+            ps.executeUpdate();
+            ResultSet ids = ps.getGeneratedKeys();
+            ids.next();
+            int id = ids.getInt( 1 );
+            user.setId( id );
+        } catch ( SQLException | ClassNotFoundException ex ) {
+            throw new LoginSampleException( ex.getMessage() );
+        }
+    }
+
+    public static void deleteUser(String email) {
+        Connection con = null;
+
+        try {
+            con = Connector.connection();
+            String sql = "delete from users where email ='"+email+"'";
+            System.out.println("SQL:" + sql);
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+
+            ps.close();
+            con.close();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void updatePassword(String email, String pass, String newPass) {
+        Connection con = null;
+
+        try {
+            con = Connector.connection();
+            String checkUser = "select * from users where email ='"+email+"'";
+            System.out.println("Test 1" + checkUser);
+            String deletePass = "update users set password='"+newPass+"' where email ='"+email+"'";
+            System.out.println(deletePass);
+            PreparedStatement ps = con.prepareStatement(checkUser);
+            System.out.println("1");
+            ResultSet resultSet = ps.executeQuery();
+            System.out.println("2");
+            String correctPass = "";
+            System.out.println("3");
+            while (resultSet.next()){
+                System.out.println("4");
+                correctPass = resultSet.getString("password");
+            }
+            System.out.println("5");
+            if (pass.equals(correctPass)){
+                System.out.println("6");
+                ps = con.prepareStatement(deletePass);
+                System.out.println("7");
+                ps.executeUpdate();
+                System.out.println("Password for user with email: " + email + " changed.");
+                System.out.println("8");
+                ps.close();
+                con.close();
+            } else {
+                System.out.println("Denne bruger findes ikke.");
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

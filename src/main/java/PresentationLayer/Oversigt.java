@@ -16,7 +16,8 @@ public class Oversigt extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, SQLException, ClassNotFoundException {
         UserMapper u = new UserMapper();
         ArrayList<User> tmp = u.customerList();
-
+        int count = UserMapper.customerList().size();
+        request.setAttribute("counter",count);
         request.setAttribute("oversigt",tmp);
         //HttpSession session = request.getSession();
         //session.setAttribute("oversigt", tmp);

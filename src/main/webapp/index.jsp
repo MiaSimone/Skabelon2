@@ -22,26 +22,26 @@
                     <form name="login" action="FrontController" method="POST">
                         <input type="hidden" name="taget" value="login">
                         Email:<br>
-                        <input type="text" name="email" value="someone@nowhere.com">
+                        <input type="text" name="email">
                         <br>
                         Password:<br>
-                        <input type="password" name="password" value="sesam">
+                        <input type="password" name="password">
                         <br>
                         <input type="submit" value="Submit">
                     </form>
                 </td>
-                <td>Or Register</td>
+                <td><td>Or Register</td></td>
                 <td>
                     <form name="register" action="FrontController" method="POST">
                         <input type="hidden" name="taget" value="register">
                         Email:<br>
-                        <input type="text" name="email" value="someone@nowhere.com">
+                        <input type="text" name="email" >
                         <br>
                         Password:<br>
-                        <input type="password" name="password1" value="sesam">
+                        <input type="password" name="password1">
                         <br>
                         Retype Password:<br>
-                        <input type="password" name="password2" value="sesam">
+                        <input type="password" name="password2">
                         <br>
                         <input type="submit" value="Submit">
                     </form>

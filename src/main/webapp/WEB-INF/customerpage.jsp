@@ -21,5 +21,17 @@
 
 
         You are now logged in as a customer of our wonderful site.
+
+    <br>
+    <br>
+    <br>
+        <form action="LogOutServlet" method="post">
+            <%-- <label for="fname">Skriv vare</label><br> --%>
+            <%--<input type="text" id="fname" name="vareNavn"><br> --%>
+            <input type="submit" value="Logout">
+        </form>
+    <br>
+    <br>
+    <br>
     </body>
 </html>
